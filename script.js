@@ -24,7 +24,6 @@ menu.addEventListener('click', (e) => {
 img.map((item) => {
     item.addEventListener('click', () => {
         let att = item.getAttribute('img-key')
-
         switch (att) {
             case '2':
                 scrollTo(0, 460)
@@ -75,7 +74,6 @@ document.addEventListener('scroll', () => {
     }
 })
 
-
 let arrOpened = Array.from(opened.children)
 arrOpened.forEach((item) => {
     item.addEventListener('click', (e) => {
@@ -96,7 +94,6 @@ let funq = function fnIf(e) {
 }
 
 document.addEventListener('click', (e) => {
-    // let i = 0
     if (e.target === zoomPlus) {
         addZoom(main.style.zoom)
     } else if (e.target === zoomMinus) {
@@ -116,34 +113,7 @@ document.addEventListener('click', (e) => {
     } else if (e.target === zoomMinus && main.style.zoom === '1.85') {
         addZoom('1.5')
     }
-    else if (e.target === rotate) {
-        let x = 0
-        while (x <= 3) {
-            if (x == 1) {
-                evt(1)
-            } else {
-                evt(x)
-            }
-            x+= 1
-        }
-    }
-
-    //     }
-    // for(i=0;i<4;i++){
-    //     if(i===0){
-    //         imgs.map((item)=> {
-    //             item.classList.add('rotate1')
-    //         })
-    //     } else if(i===1){
-    //         imgs.map((item)=> {
-    //             item.classList.remove('rotate1')
-    //             item.classList.add('rotate2')
-    //         })
-    //     }
-    // }
-    // }
 })
-
 
 function addZoom(zoom) {
     if (zoom === '') {
@@ -193,32 +163,33 @@ function removeZoom(zoom) {
     }
 }
 
-
-function evt(i) {
-    document.addEventListener('click', (e) => {
-        if (e.target === rotate) {
-            console.log(i)
-            if (i == 0) {
-                imgs.forEach((item) => {
-                    item.classList.add('rotate1')
-                })
-            } else if (i == 1) {
-                imgs.forEach((item) => {
-                    item.classList.remove('rotate1')
-                    item.classList.add('rotate2')
-                })
-            } else if (i == 2) {
-                imgs.forEach((item) => {
-                    item.classList.remove('rotate2')
-                    item.classList.add('rotate3')
-                })
-            } else if (i == 3) {
-                imgs.forEach((item) => {
-                    item.classList.add('rotate3')
-                    item.classList.add('rotate4')
-                })
-            }
+let count = 0
+rotate.addEventListener('click', (e) => {
+    console.log(count)
+    if (count <= 3) {
+        count++
+        if (count == 1) {
+            imgs.forEach((item) => {
+                item.classList.remove('rotate4')
+                item.classList.add('rotate1')
+            })
+        } else if (count == 2) {
+            imgs.forEach((item) => {
+                item.classList.remove('rotate1')
+                item.classList.add('rotate2')
+            })
+        } else if (count == 3) {
+            imgs.forEach((item) => {
+                item.classList.remove('rotate2')
+                item.classList.add('rotate3')
+            })
         }
-    })
-}
-evt(0)
+        else {
+            imgs.forEach((item) => {
+                item.classList.remove('rotate3')
+                item.classList.add('rotate4')
+            })
+            count = 0
+        }
+    }
+})
